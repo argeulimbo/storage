@@ -6,6 +6,12 @@ public interface ProdutoService {
 	
 	Produto findById(Long id);
 	
-	Produto create(Produto produto);
+	Iterable<Produto> findAll();
+	
+	Produto create(Produto produtoToCreate);
+	
+	Produto update(Long id, Produto produtoToUpdate);
+	
+	Produto delete(Long id);
 
 }
