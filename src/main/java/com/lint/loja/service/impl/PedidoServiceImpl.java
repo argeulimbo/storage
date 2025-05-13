@@ -9,9 +9,14 @@ import com.lint.loja.repository.PedidoRepository;
 import com.lint.loja.service.PedidoService;
 
 public class PedidoServiceImpl implements PedidoService {
-	
+
 	@Autowired
 	private PedidoRepository pedidoRepository;
+
+	@Override
+	public Iterable<Pedido> findAll() {
+		return pedidoRepository.findAll();
+	}
 
 	@Override
 	public Pedido findById(Long id) {
@@ -22,15 +27,9 @@ public class PedidoServiceImpl implements PedidoService {
 	public Pedido create(Pedido pedidoToCreate) {
 		if (pedidoToCreate.getId() != null && pedidoRepository.existsById(pedidoToCreate.getId())) {
 			throw new IllegalArgumentException("O pedido do ID " + pedidoToCreate.getId() + " já existe!");
-		}
-		else {
+		} else {
 			return pedidoRepository.save(pedidoToCreate);
 		}
-	}
-
-	@Override
-	public Iterable<Pedido> findAll() {
-		return pedidoRepository.findAll();
 	}
 
 	@Override
@@ -41,8 +40,14 @@ public class PedidoServiceImpl implements PedidoService {
 
 	@Override
 	public Pedido delete(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (id == null && !pedidoRepository.existsById(id)) {
+			throw new IllegalArgumentException(String.format("Erro: Não foi possível encontrar o ID %d fornecido para exclusão!", id));
+		} 
+		else {
+			Pedido pedido = pedidoRepository.findById(id).orElse(null);
+			pedidoRepository.deleteById(id);
+			return pedido;
+		}
 	}
 
 }
