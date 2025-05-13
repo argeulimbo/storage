@@ -2,13 +2,34 @@ package com.lint.loja.model;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.lint.loja.model.enums.Status;
 
+@Entity
+@Table(name = "tb_pedido")
 public class Pedido {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(nullable = false)
 	private Integer numero;
+	
+	@Column(nullable = false)
 	private String descricaoItem;
+	
+	@Column
+	private Integer quantidadePedido;
+	
+	@Column
+	private Double valorUnitarioItemPedido;
 	
 	private Produto produtoPedido;
 	private Fornecedor fornecedorPedido;
@@ -51,6 +72,10 @@ public class Pedido {
 	}
 	public void setStatusPedido(Status statusPedido) {
 		this.statusPedido = statusPedido;
+	}
+	
+	public void valorTotalPedido(Produto produto) {
+		
 	}
 	
 	@Override

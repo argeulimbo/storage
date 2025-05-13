@@ -3,42 +3,69 @@ package com.lint.loja.model;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Entity
+@Table(name = "tb_fornecedor")
 public class Fornecedor {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(nullable = false, length = 255)
 	private String name;
+	
+	@Column(nullable = false, length = 20)
 	private String documento;
 	
+	@Autowired
 	private Pedido pedidoGerado;
 	private List<Pedido> listPedido;
 	
 	public Long getId() {
 		return id;
 	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getDocumento() {
 		return documento;
 	}
+	
 	public void setDocumento(String documento) {
 		this.documento = documento;
 	}
+	
 	public Pedido getPedidoGerado() {
 		return pedidoGerado;
 	}
+	
 	public void setPedidoGerado(Pedido pedidoGerado) {
 		this.pedidoGerado = pedidoGerado;
 	}
+	
 	public List<Pedido> getListPedido() {
 		return listPedido;
 	}
+	
 	public void setListPedido(List<Pedido> listPedido) {
 		this.listPedido = listPedido;
 	}
