@@ -3,11 +3,13 @@ package com.lint.loja.service.impl;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.lint.loja.model.Fornecedor;
 import com.lint.loja.repository.FornecedorRepository;
 import com.lint.loja.service.FornecedorService;
 
+@Service
 public class FornecedorServiceImpl implements FornecedorService {
 	
 	@Autowired

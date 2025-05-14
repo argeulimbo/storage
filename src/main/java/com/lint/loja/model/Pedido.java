@@ -4,9 +4,12 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.lint.loja.model.enums.Status;
@@ -31,9 +34,14 @@ public class Pedido {
 	@Column
 	private Double valorUnitarioItemPedido;
 	
+	@ManyToOne
 	private Produto produtoPedido;
+	
+	@ManyToOne
 	private Fornecedor fornecedorPedido;
 	
+	@Enumerated(EnumType.STRING)
+	@Column
 	private Status statusPedido;
 	
 	public Long getId() {
@@ -74,8 +82,11 @@ public class Pedido {
 		this.statusPedido = statusPedido;
 	}
 	
-	public void valorTotalPedido(Produto produto) {
-		
+	public Double valorTotalPedido() {
+		if (produtoPedido != null && quantidadePedido != null) {
+			return produtoPedido.getValorUnitario() * quantidadePedido;
+		} 
+		return 0.0;
 	}
 	
 	@Override

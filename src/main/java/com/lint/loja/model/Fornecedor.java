@@ -8,9 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name = "tb_fornecedor")
@@ -26,8 +25,7 @@ public class Fornecedor {
 	@Column(nullable = false, length = 20)
 	private String documento;
 	
-	@Autowired
-	private Pedido pedidoGerado;
+	@OneToMany(mappedBy = "fornecedorPedido")
 	private List<Pedido> listPedido;
 	
 	public Long getId() {
@@ -51,15 +49,7 @@ public class Fornecedor {
 	}
 	
 	public void setDocumento(String documento) {
-		this.documento = documento;
-	}
-	
-	public Pedido getPedidoGerado() {
-		return pedidoGerado;
-	}
-	
-	public void setPedidoGerado(Pedido pedidoGerado) {
-		this.pedidoGerado = pedidoGerado;
+		this.documento = documento;	
 	}
 	
 	public List<Pedido> getListPedido() {

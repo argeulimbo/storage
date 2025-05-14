@@ -2,12 +2,36 @@ package com.lint.loja.model;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Entity
+@Table(name = "tb_produto")
 public class Produto {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(nullable = false, length = 255)
 	private String name;
+	
+	@Column(nullable = false)
 	private Integer quantidade;
+	
+	@Column
 	private Double valorUnitario;
+
+	@Autowired
+	@ManyToOne
+	private Pedido pedido;
 	
 	public Long getId() {
 		return id;
@@ -39,8 +63,16 @@ public class Produto {
 	
 	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
-	}
+	}	
 	
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
 	@Override
 	public String toString() {
 		return " ID: " + id + " | Produto: " + name + " | qtd: " + quantidade + " | vlrUnit: " + valorUnitario;

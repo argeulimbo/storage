@@ -3,11 +3,13 @@ package com.lint.loja.service.impl;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.lint.loja.model.Produto;
 import com.lint.loja.repository.ProdutoRepository;
 import com.lint.loja.service.ProdutoService;
 
+@Service
 public class ProdutoServiceImpl implements ProdutoService {
 
 	@Autowired
